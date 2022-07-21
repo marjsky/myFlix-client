@@ -1,6 +1,9 @@
 import React from 'react';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import Hancock from './hancock.png';
+import FridayNightLights from './friday_night_lights.png';
+import JustMercy from './just_mercy.png';
 
 export class MainView extends React.Component {
 
@@ -11,15 +14,15 @@ export class MainView extends React.Component {
         { _id: 1,
           Title: 'Hancock',
           Description: 'Hancock is a superhero whose ill-considered behavior regularly causes damage in the millions. He changes when the person he saves helps him improve his public image.',
-          ImagePath: 'https://www.imdb.com/title/tt0448157/mediaviewer/rm871864576/?ref_=tt_ov_i'},
+          ImagePath: Hancock},
         { _id: 2,
           Title: 'Friday Night Lights',
           Description: 'Based on H.G. Bissingers book, which profiled the economically depressed town of Odessa, Texas and their heroic high school football team, The Permian High Panthers.',
-          ImagePath: 'https://www.imdb.com/title/tt0390022/mediaviewer/rm3683556608/?ref_=tt_ov_i'},
+          ImagePath: FridayNightLights},
         { _id: 3,
           Title: 'Just Mercy',
           Description: 'World-renowned civil rights defense attorney Bryan Stevenson works to free a wrongly condemned death row prisoner.',
-          ImagePath: 'https://www.imdb.com/title/tt4916630/mediaviewer/rm638288385/?ref_=tt_ov_i'}
+          ImagePath: JustMercy}
       ],
       selectedMovie: null
     }
@@ -34,7 +37,8 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie } = this.state;
 
-    if (selectedMovie) return <MovieView movie={selectedMovie} />;
+    if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { 
+      this.setSelectedMovie(newSelectedMovie); }}/>;
 
     if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
 
