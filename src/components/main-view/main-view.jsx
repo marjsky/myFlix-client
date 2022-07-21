@@ -1,4 +1,6 @@
 import React from 'react';
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
 
 export class MainView extends React.Component {
 
@@ -18,18 +20,21 @@ export class MainView extends React.Component {
           Title: 'Just Mercy',
           Description: 'World-renowned civil rights defense attorney Bryan Stevenson works to free a wrongly condemned death row prisoner.',
           ImagePath: 'https://www.imdb.com/title/tt4916630/mediaviewer/rm638288385/?ref_=tt_ov_i'}
-      ]
+      ],
+      selectedMovie: null
     }
   }
   
   render() {
-    const { movies } = this.state;
+    const { movies, selectedMovie } = this.state;
+
+    if (selectedMovie) return <MovieView movie={selectedMovie} />;
 
     if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
 
     return (
       <div className="main-view">
-        {movies.map(movie => <div key={movie._id}>{movie.Title}</div>)}
+        {movies.map(movie => <MovieCard key={movie._id} movie={movie}/>)}
       </div>
     );
   }
