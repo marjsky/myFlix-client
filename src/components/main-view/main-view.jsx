@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import Hancock from './hancock.png';
@@ -10,22 +11,21 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [
-        { _id: 1,
-          Title: 'Hancock',
-          Description: 'Hancock is a superhero whose ill-considered behavior regularly causes damage in the millions. He changes when the person he saves helps him improve his public image.',
-          ImagePath: Hancock},
-        { _id: 2,
-          Title: 'Friday Night Lights',
-          Description: 'Based on H.G. Bissingers book, which profiled the economically depressed town of Odessa, Texas and their heroic high school football team, The Permian High Panthers.',
-          ImagePath: FridayNightLights},
-        { _id: 3,
-          Title: 'Just Mercy',
-          Description: 'World-renowned civil rights defense attorney Bryan Stevenson works to free a wrongly condemned death row prisoner.',
-          ImagePath: JustMercy}
-      ],
+      movies: [],
       selectedMovie: null
     }
+  }
+
+  componentDidMount() {
+    axios.get('https://mj23flixdb.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies:response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   setSelectedMovie(newSelectedMovie) {
@@ -40,7 +40,7 @@ export class MainView extends React.Component {
     if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { 
       this.setSelectedMovie(newSelectedMovie); }}/>;
 
-    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+    if (movies.length === 0) return <div className="main-view" />;
 
     return (
       <div className="main-view">

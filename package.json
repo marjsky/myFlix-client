@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/marjsky/myFlix-client#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "npm-check-updates": "^15.3.4",
     "parcel": "^2.6.2",
     "react": "^18.2.0",
