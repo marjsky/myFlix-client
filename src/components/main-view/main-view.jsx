@@ -20,18 +20,6 @@ export class MainView extends React.Component {
     }
   }
 
-  componentDidMount() {
-    axios.get('https://mj23flixdb.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies:response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
   getMovies(token) {
     axios.get('https://mj23flixdb.herokuapp.com/movies', {
       Headers: {Authorization: `Bearer ${token}`}
@@ -45,6 +33,18 @@ export class MainView extends React.Component {
       console.log(error);
     });
   }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
+  }
+
+
 
 /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
 
@@ -67,6 +67,14 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user:null
+    });
+  }
+
   onRegistration(register) {
     this.setState({
       register
@@ -79,7 +87,10 @@ export class MainView extends React.Component {
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-    if (!register) return <RegistrationView onRegistration={register => this.onRegistration(register)} />;
+    if (!register) 
+      return ( 
+        <RegistrationView 
+          onRegistration={register => this.onRegistration(register)} />);
 
     if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => {this.setSelectedMovie(newSelectedMovie); }}/>;
 
