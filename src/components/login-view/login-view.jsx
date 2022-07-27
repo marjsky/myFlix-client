@@ -64,9 +64,9 @@ export function LoginView(props) {
         </Container>
       </Navbar>
       <Row className='justify-content-sm-center'>
-        <Col xs={12} sm={8} md={6} >
+        <Col style={{ paddingTop: '3rem', }} xs={8} sm={8} md={6} >
           <Card>
-            <Card.Body className='mt-3'>
+            <Card.Body>
               <Card.Title style={{textAlign: 'center'}}>Login </Card.Title>
               <Form>
                 <Form.Group controlId='formUsername'>
