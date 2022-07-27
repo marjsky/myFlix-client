@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {Form, Button, Card, CardGroup, Container, Col, Row} from 'react-bootstrap';
-import axios, { Axios } from 'axios';
-
+import axios from 'axios';
+import './registration-view.scss';
 export function RegistrationView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -12,7 +12,6 @@ export function RegistrationView(props) {
   const [ usernameErr, setUsernameErr ] = useState('');
   const [ passwordErr, setPasswordErr ] = useState('');
   const [ emailErr, setEmailErr ] = useState('');
-  const [ birthdayErr, setBirthdayErr ] = useState('');
 
   // validate function
   const validate = () => {
@@ -141,5 +140,9 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.PropTypes = {
-  onRegistration: PropTypes.func.isRequired
+  register: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired
+  }),
 };
