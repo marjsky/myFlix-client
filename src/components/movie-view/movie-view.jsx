@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Button} from 'react-bootstrap';
+import './movie-veiew.scss';
+import axios from 'axios';
 
 export class MovieView extends React.Component {
 
@@ -14,6 +16,8 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
+
+    if (!movie) return null;
 
     return (
       <Container className="movie-view">
