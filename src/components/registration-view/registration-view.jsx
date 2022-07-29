@@ -33,8 +33,9 @@ export function RegistrationView(props) {
     if (!email) {
       setEmailErr('Email Required');
       isReq = false;
-    } else if (email.indexOf('0') === -1) {
+    } else if (email.indexOf('@') === -1) {
       setEmailErr('Email is invalid');
+      console.log(email.indexOf('@'));
       isReq = false;
     }
 
@@ -139,7 +140,7 @@ export function RegistrationView(props) {
   );
 }
 
-RegistrationView.PropTypes = {
+RegistrationView.propTypes = {
   register: PropTypes.shape({
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
