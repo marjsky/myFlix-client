@@ -40004,7 +40004,7 @@ class MovieView extends (0, _reactDefault.default).Component {
         }, this);
     }
 }
-MovieView.PropTypes = {
+MovieView.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         Title: (0, _propTypesDefault.default).string.isRequired,
         Description: (0, _propTypesDefault.default).string.isRequired,
