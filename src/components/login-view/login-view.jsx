@@ -52,17 +52,6 @@ export function LoginView(props) {
 
   return (
     <Container fluid className='loginContainer my-2 mx-12'>
-      <Navbar bg='primary' variant='dark'>
-        <Container>
-          <Navbar.Brand href='#home'>AppFlix</Navbar.Brand>
-          <Navbar.Toggle aria-controls='basic-navbar-nav'/>
-          <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='me-auto'>
-              <Nav.Link href='#Register'>Register</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
       <Row className='justify-content-sm-center'>
         <Col style={{ paddingTop: '3rem', }} xs={8} sm={8} md={6} >
           <Card>
