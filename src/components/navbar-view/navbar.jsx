@@ -20,19 +20,18 @@ export function Menubar({user}) {
   };
 
   return (
-    <Navbar className='main-nav' sticky='top' bg='dark' expand='lg' variant='dark'>
+    <Navbar className='main-nav' sticky='top' bg='dark' expand='sm' variant='dark'>
       <Container>
       <Navbar.Brand className='navbar-logo' href='/'>myFlixCinema</Navbar.Brand>
         <Navbar.Toggle aria-controls='reponsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='ml-auto'>
           {isAuth() && (
-            <Nav.Link href={'/users/${user}'}>{user}</Nav.Link>
+            <Nav.Link href={`/user/${user}`}>Welcome, {user}</Nav.Link>
           )}
           {isAuth() && (
             <Button variant='link' onClick={() => {
-              this.onLoggedOut() 
-            }}>Logout</Button>
+              onLoggedOut()}}>Logout</Button>
           )}
           {!isAuth() && (
             <Nav.Link href='/'>Sign-in</Nav.Link>
