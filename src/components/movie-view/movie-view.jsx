@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 
-class MovieView extends React.Component {
+export class MovieView extends React.Component {
   
   constructor(props) {
     super(props);
@@ -76,10 +76,12 @@ class MovieView extends React.Component {
         </Row>
         <Row>
           <Col>
+            <div className="movie-genre">
+              <span className="label">Genre: </span>
               <Link to={`/genres/${movie.Genre.Name}`}>
-                <Button variant="link">Genre</Button>
+                <span className="value">{movie.Genre.Name}</span>
               </Link>
-              {/* <span className="value">{movie.Genre.Name}</span> */}
+            </div>
           </Col>
         </Row>
         <Row>
