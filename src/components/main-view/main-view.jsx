@@ -2,12 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
+
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { RegistrationView } from '../registration-view/registration-view';
+import { Menubar } from '../navbar-view/navbar';
+import { ProfileView } from '../profile-view/profile-view';
 
 
 export class MainView extends React.Component {
@@ -18,10 +21,11 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       user: null,
-    }
+      favoriteMovie: []
+    };
   }
 
-    componentDidMount() {
+  componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -37,7 +41,7 @@ export class MainView extends React.Component {
     })
     .then(response => {
       this.setState({
-        movies:response.data
+        movies: response.data
       });
     })
     .catch(error => {
@@ -48,7 +52,7 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      user:authData.user.Username
+      user: authData.user.Username
     });
 
     localStorage.setItem('token', authData.token);
@@ -56,11 +60,20 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  onLoggedOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    this.setState({
+        user: null
+    });
+}
+
   render() {
     const { movies, user } = this.state;
 
     return (
       <Router>
+        <Menubar user={user} />
         <Row className="main-view justify-content-md-center">
           <Route exact path='/' render={() => {
             if (!user) return <Col>
@@ -81,7 +94,19 @@ export class MainView extends React.Component {
             </Col>
           }} />
 
-          <Route path='/movies/:movieId' render={() => {
+          {/* route for link on main-view to profile-view */}
+          <Route path={`/user/:username`} render={({match, history}) => {
+            if (!user) return <LoginView
+              onLoggedIn={user => this.onLoggedIn(user)} />
+            return <Col>
+              <ProfileView 
+                history={history}
+                movies={movies}
+                user={user === match.params.username} />
+            </Col>
+          }} />
+
+          <Route path='/movies/:movieId' render={({match, history}) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
@@ -94,7 +119,7 @@ export class MainView extends React.Component {
             </Col>
           }} />
 
-          <Route path='/directors/:name' render={() => {
+          <Route path='/directors/:name' render={({match, history}) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
@@ -107,7 +132,7 @@ export class MainView extends React.Component {
             </Col>
           }} />
 
-          <Route path='/genre/:name' render={() => {
+          <Route path='/genre/:name' render={({match, history}) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
@@ -125,4 +150,4 @@ export class MainView extends React.Component {
   }
 }
 
-export default MainView
+export default MainView;
