@@ -4,6 +4,8 @@ import {Form, Button, Card, CardGroup, Container, Col, Row} from 'react-bootstra
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import UserInfo from './user-info';
+import UserUpdate from './user-update';
+import FavoriteMovies from './favorite-movies';
 
   /**
     Allow a user to update their user info (username, password, email, date of birth) DONE
@@ -12,7 +14,7 @@ import UserInfo from './user-info';
     Allow a user to remove a movie from their list of favorites 
    */
 
-export function ProfileView () {
+export function ProfileView ({movies}) {
 
   const [ user, setUser ] = useState({
     Username: '',
@@ -30,8 +32,9 @@ export function ProfileView () {
 
   const handleChange = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
-    setUser(values => ({...values, [name]: value,}))
+    const value = (event.target.value);
+    setUser(values => ({...values, [name]: value,}));
+    console.log(setUser);
   }
 
   const getUser = () => {
@@ -85,15 +88,17 @@ export function ProfileView () {
       const currentUser = localStorage.getItem('user');
       const token = localStorage.getItem('token');
       // Send request to update for users
-      axios.put(`https://mj23flixdb.herokuapp.com/users/${currentUser}`, user,{
+      axios.put(`https://mj23flixdb.herokuapp.com/users/${currentUser}`, {
+    setUser
+      },
+      {
         headers: { Authorization: `Bearer ${token}`},
       })
       .then(response => {
-        const data = response.data;
-        console.log(data);
-        localStorage.setItem(token, response.data.Password);
-        alert('Your profile has been updated!') ;
-        window.open(`/`, '_self'); // '_self' page open current tab
+        console.log(response.data);
+       
+        // alert('Your profile has been updated!') ;
+        // window.open(`/user`, '_self'); // '_self' page open current tab
       })
       .catch( e => {
         console.error(e);
@@ -110,83 +115,56 @@ export function ProfileView () {
     }
   }, []);
 
+  const favoriteMovieList = movies.filter(( movies ) => {
+    return user.FavoriteMovies.includes(movies._id);
+  });
+  console.log(favoriteMovieList);
+
+  const deregister = () => {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem("user");
+    axios.delete(`https://mj23flixdb.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${token}`},
+    })
+    .then((response) => {
+      console.log(response);
+      alert('Profile deleted');
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      window.open('/', '_self');
+    })
+    .catch(error => {
+      console.log(error);
+      console.log('Unable to delete profile');
+    })
+  }
+
   return(
     <Container>
-      <Row>
+      <Row style={{marginTop: 10}}>
         <Col xs={12} sm={4}>
           <Card>
             <Card.Body>
-            <UserInfo name={user.Username} email={user.Email} />
+              <UserInfo name={user.Username} email={user.Email} />
             </Card.Body>
           </Card>
         </Col>
-    
-        <Col xs={12} sm={8}>
-          <CardGroup>
-            <Card>
-              <Card.Body>
-                <Card.Title>Update Profile</Card.Title>
-                <Form>
-                  <Form.Group 
-                    controlId='formUsername'
-                    className='reg-form-inputs'>
-                    <Form.Label>Username:</Form.Label>
-                      <Form.Control
-                        type="text" 
-                        defaultValue={user.Username} 
-                        onChange={e => handleChange(e)}
-                        required 
-                        placeholder='Enter a username'
-                        />
-                        {values.usernameErr && <p>{values.usernameErr}</p>}
-                  </Form.Group>
-                  <Form.Group
-                    controlId='fromPassword'
-                    className='reg-form-inputs'>
-                    <Form.Label>Password:</Form.Label>
-                      <Form.Control 
-                        type="password" 
-                        defaultValue={user.Password} 
-                        onChange={e => handleChange(e)}
-                        required
-                        minLength={8}
-                        placeholder='Your password must be 8 or more characters' 
-                        />
-                        {values.passwordErr && <p>{values.passwordErr}</p>}
-                  </Form.Group>
-                  <Form.Group
-                    controlId='Email'
-                    className='reg-form-inputs'>
-                    <Form.Label>Email:</Form.Label>
-                      <Form.Control
-                        type="email"
-                        defaultValue={user.Email} 
-                        onChange={e => handleChange(e)}
-                        required
-                        placeholder='Enter your email address' 
-                        />
-                        {values.emailErr && <p>{values.emailErr}</p>}
-                  </Form.Group>
-                  <Form.Group controlId='updateBirthday'>
-                    <Form.Label>Birthday:</Form.Label>
-                      <Form.Control 
-                        type="date" 
-                        defaultValue={user.Birthday} 
-                        onChange={e => handleChange(e)} 
-                        />
-                  </Form.Group>
-                  <Button 
-                    variant='primary'
-                    type="submit" 
-                    onClick={(e) => handleSubmit(e)}>
-                      Submit
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </CardGroup>
+        <Col xs={12} sm={6}>
+          <Card>
+            <Card.Body>
+              <UserUpdate user={user} values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>
+            </Card.Body>
+          </Card>
         </Col>
-    </Row>
-  </Container>
+        <Col>
+          <Button className='deregister-button' variant='danger' onClick={() => deregister()}>Deregister</Button>   
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <FavoriteMovies favoriteMovieList={favoriteMovieList} />
+        </Col>
+      </Row>
+    </Container>
   )
 }
