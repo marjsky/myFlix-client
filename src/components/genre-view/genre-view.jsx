@@ -8,16 +8,23 @@ export class GenreView extends React.Component {
     const { genre, onBackClick } = this.props;
     
     return(
-      <Card className='genreCard'>
-        <Card.Head>{genre.Name}</Card.Head>
-        <Card.Body>
-          <Card.Text>{genre.Description}</Card.Text>
-          <Button variant='warning' onClick={() => { onBackClick() }}>Back</Button>
+      <Card style={{ width: 'auto'}}>
+        <Card.Body style={{ fontSize: '10px' }}>
+          <Card.Title>{genre.Name}</Card.Title>
+          <Card.Text>
+            Description <br/>
+            {genre.Description}
+          </Card.Text>
+          <Button
+            variant='primary'
+            onClick={() => {onBackClick(null)}}>Back</Button>
         </Card.Body>
       </Card>
     )
   }
 }
+
+export default GenreView;
 
 GenreView.propTypes = {
     Genre: PropTypes.shape({
