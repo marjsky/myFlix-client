@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Row, Figure, Button, Card } from 'react-bootstrap';
+import { Col, Row, Figure, Button, Card, Container } from 'react-bootstrap';
 import './profile-view.scss';
 import axios from 'axios';
  
-function FavoriteMovies({ favoriteMovieList }) {
+export function FavoriteMovies({ favoriteMovieList2 }) {
   
   // const favoriteMoviesId = favoriteMovies.map(m => m._id)
 
@@ -23,7 +23,7 @@ function FavoriteMovies({ favoriteMovieList }) {
   };
 
   return(
-    <Card>
+    <Container>
       <Card.Body>
         <Row>
           <Col xs={12}>
@@ -31,7 +31,7 @@ function FavoriteMovies({ favoriteMovieList }) {
           </Col>  
         </Row>
         <Row>
-          {favoriteMovieList.map(({ImagePath, Title, _id}) => {
+          {favoriteMovieList2.map(({ImagePath, Title, _id}) => {
             return (
               <Col xs={12} md={4} lg={4} key={_id} className='fav-movie'>
                 <Figure>
@@ -51,7 +51,7 @@ function FavoriteMovies({ favoriteMovieList }) {
           })}
         </Row>
       </Card.Body>
-    </Card>
+    </Container>
   )
 }
 

@@ -1,70 +1,67 @@
 import React from 'react';
-import { Card, Form, Button } from 'react-bootstrap'
+import { Form, Button, Row, Card, Container} from 'react-bootstrap';
 
-function UserUpdate({user, values, handleChange, handleSubmit}) {
+export function UserUpdate ({
+  handleUpdate, 
+  username, setUsername, usernameErr,
+  password, setPassword, passwordErr,
+  email, setEmail, emailErr,
+  birthday, setBirthday,
+}) {
 
-  
-  return (
-    <div>
-      <Card.Title>Update Profile</Card.Title>
+  return(
+    <Card>
+      <Card.Body>
+      <Row>
+        <h3>Profile</h3>
+      </Row>
       <Form>
-        <Form.Group 
-          controlId='formUsername'
-          className='reg-form-inputs'>
+        <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username:</Form.Label>
-            <Form.Control
-              type="text" 
-              defaultValue={user.Username} 
-              onChange={e => handleChange(e)}
-              required 
-              placeholder='Enter a username'
-              />
-              {values.usernameErr && <p>{values.usernameErr}</p>}
+          <Form.Control
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            type="text"
+            placeholder="username"
+          />
+          {usernameErr && <p>{usernameErr}</p>}
         </Form.Group>
-        <Form.Group
-          controlId='fromPassword'
-          className='reg-form-inputs'>
-          <Form.Label>Password:</Form.Label>
-            <Form.Control 
-              type="password" 
-              defaultValue={user.Password} 
-              onChange={e => handleChange(e)}
-              required
-              minLength={8}
-              placeholder='Your password must be 8 or more characters' 
-              />
-              {values.passwordErr && <p>{values.passwordErr}</p>}
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            value={password}
+            placeholder="Password"
+          />
+          {passwordErr && <p>{passwordErr}</p>}
         </Form.Group>
-        <Form.Group
-          controlId='Email'
-          className='reg-form-inputs'>
-          <Form.Label>Email:</Form.Label>
-            <Form.Control
-              type="email"
-              defaultValue={user.Email} 
-              onChange={e => handleChange(e)}
-              required
-              placeholder='Enter your email address' 
-              />
-              {values.emailErr && <p>{values.emailErr}</p>}
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="Enter new email"
+          />
+          {emailErr && <p>{emailErr}</p>}
         </Form.Group>
-        <Form.Group controlId='updateBirthday'>
+        <Form.Group className="mb-3" controlId="birthday">
           <Form.Label>Birthday:</Form.Label>
-            <Form.Control 
-              type="date" 
-              defaultValue={user.Birthday} 
-              onChange={e => handleChange(e)} 
-              />
+          <Form.Control
+            onChange={(e) => setBirthday(e.target.value)}
+            value={birthday}
+            type="date"
+            placeholder="birthday"
+          />
         </Form.Group>
-        <Button 
-          variant='primary'
-          type="submit" 
-          onClick={(e) => handleSubmit(e)}>
-            Submit
-        </Button>
       </Form>
-    </div>
+      <Button className="col-md-12 text-center" onClick={handleUpdate}>
+        Update 
+      </Button>
+      </Card.Body>
+    </Card>
   );
-}
+} 
 
 export default UserUpdate;
