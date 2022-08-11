@@ -1,51 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {Form, Button, Card, CardGroup, Container, Col, Row} from 'react-bootstrap';
+import { Button, Card, Figure, Container, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import UserInfo from './user-info';
-import UserUpdate from './user-update';
-import FavoriteMovies from './favorite-movies';
-
-  /**
-    Allow a user to update their user info (username, password, email, date of birth) DONE
-    Allow a user to deregister
-    Display a user's favorite movies DONE?
-    Allow a user to remove a movie from their list of favorites 
-   */
+import { UserInfo } from './user-info';
+import { UserUpdate } from './user-update';
+import { FavoriteMovies } from './favorite-movies';
 
 export function ProfileView ({movies}) {
 
-  const [ user, setUser ] = useState({
-    Username: '',
-    Password: '',
-    Email: '',
-    Birthday: '',
-    FavoriteMovies: []
-  });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [user, setUserData] = useState("");
+  const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
+  
   // Declare hook for each input
-  const [values, setValues] = useState({
-    usernameErr: '',
-    passwordErr: '',
-    emailErr: '',
-  });
+  const [ usernameErr, setUsernameErr ] = useState('');
+  const [ passwordErr, setPasswordErr ] = useState('');
+  const [ emailErr, setEmailErr ] = useState('');
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = (event.target.value);
-    setUser(values => ({...values, [name]: value,}));
-    console.log(setUser);
-  }
-
-  const getUser = () => {
+  const getUserData = () => {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem("user");
     axios.get(`https://mj23flixdb.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then((response) => {
-      setUser(response.data);
-      console.log(response.data);
+      setUsername(response.data.Username);
+      setEmail(response.data.Email);
+      setUserData(response.data);
+      setFavoriteMoviesList(response.data.FavoriteMovies);
+      console.log(response);
     })
     .catch(error => {
       console.log(error);
@@ -55,50 +41,53 @@ export function ProfileView ({movies}) {
   // validate function
   const validate = () => {
     let isReq = true;
-    if (!user.Username){
-      setValues({...values, usernameErr: 'Username Required'});
+    if (!username){
+      setUsernameErr('Username Required');
       isReq = false;
-    } else if (user.Username.length < 2) {
-      setValues({...values, usernameErr: 'Username must be 2 character long'});
-      isReq = false;
-    }
-    if (!user.Password) {
-      setValues({...values, passwordErr: 'Password Required'});
-      isReq = false;
-    } else if (user.Password.length <6) {
-      setValues({...values, passwordErr: 'Password must be 6 character long'});
+    } else if (username.length < 2) {
+      setUsernameErr('Username must be 2 character long');
       isReq = false;
     }
-    if (!user.Email) {
-      setValues({...values, emailErr: 'Email required'});
+    if (!password) {
+      setPasswordErr('Password Required');
       isReq = false;
-    } else if (user.Email.indexOf('@') === -1) {
-      setValues({...values, emailErr: 'Email is invalid'});
-      console.log(user.Email.indexOf('@'));
+    } else if (password.length <6) {
+      setPasswordErr('Password must be 6 character long');
       isReq = false;
     }
-
+    if (!email) {
+      setEmailErr('Email required');
+      isReq = false;
+    } else if (email.indexOf('@') === -1) {
+      setEmailErr('Email is invalid');
+      console.log(email.indexOf('@'));
+      isReq = false;
+    }
     return isReq;
   }
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
       const currentUser = localStorage.getItem('user');
       const token = localStorage.getItem('token');
       // Send request to update for users
-      axios.put(`https://mj23flixdb.herokuapp.com/users/${currentUser}`, {
-    setUser
+      axios.put(`https://mj23flixdb.herokuapp.com/users/${currentUser}`, 
+      {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday,
       },
       {
         headers: { Authorization: `Bearer ${token}`},
       })
       .then(response => {
-        console.log(response.data);
-       
-        // alert('Your profile has been updated!') ;
-        // window.open(`/user`, '_self'); // '_self' page open current tab
+        alert("Your profile has been updated");
+        localStorage.setItem("user", response.data.Username),
+          console.log(response.data);
+        window.open("/", "_self");
       })
       .catch( e => {
         console.error(e);
@@ -108,17 +97,8 @@ export function ProfileView ({movies}) {
   };
 
   useEffect(() => {
-    let isMounted = true;
-    isMounted && getUser();
-    return () => {
-      isMounted = false;
-    }
+    getUserData();
   }, []);
-
-  const favoriteMovieList = movies.filter(( movies ) => {
-    return user.FavoriteMovies.includes(movies._id);
-  });
-  console.log(favoriteMovieList);
 
   const deregister = () => {
     let token = localStorage.getItem('token');
@@ -138,11 +118,17 @@ export function ProfileView ({movies}) {
       console.log('Unable to delete profile');
     })
   }
+  
+  const favoriteMovieList2 = movies.filter(( movies ) => {
+    return favoriteMoviesList.includes(movies._id);
+  });
+  console.log(favoriteMovieList2);
 
   return(
+
     <Container>
       <Row style={{marginTop: 10}}>
-        <Col xs={12} sm={4}>
+        <Col xs={12} sm={3}>
           <Card>
             <Card.Body>
               <UserInfo name={user.Username} email={user.Email} />
@@ -150,21 +136,33 @@ export function ProfileView ({movies}) {
           </Card>
         </Col>
         <Col xs={12} sm={6}>
-          <Card>
-            <Card.Body>
-              <UserUpdate user={user} values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>
-            </Card.Body>
-          </Card>
+              <UserUpdate 
+                handleUpdate={handleUpdate} 
+                username={username} setUsername={setUsername} usernameErr={usernameErr}
+                password={password} setPassword={setPassword} passwordErr={passwordErr}
+                email={email} setEmail={setEmail} emailErr={emailErr}
+                birthday={birthday} setBirthday={setBirthday}/>
         </Col>
         <Col>
           <Button className='deregister-button' variant='danger' onClick={() => deregister()}>Deregister</Button>   
         </Col>
-      </Row>
-      <Row>
-        <Col>
-          <FavoriteMovies favoriteMovieList={favoriteMovieList} />
+      </Row>     
+      <Card>
+        <Col sm={12}>
+            <FavoriteMovies favoriteMovieList2={favoriteMovieList2} />
         </Col>
-      </Row>
+    </Card>
     </Container>
   )
+}
+
+export default ProfileView;
+
+ProfileView.propTypes = {
+  profileView: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Birthday: PropTypes.string,
+  }),
 }
