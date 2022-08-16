@@ -2916,7 +2916,7 @@ var _reducersDefault = parcelHelpers.interopDefault(_reducers);
 var _reduxDevtoolsExtension = require("redux-devtools-extension");
 // Import statement to indicate that you need to bundle `./index.scss`
 var _indexScss = require("./index.scss");
-const store = (0, _redux.createStore)((0, _reducersDefault.default), (0, _reduxDevtoolsExtension.devToolsEnhancer)());
+const store = (0, _redux.legacy_createStore)((0, _reducersDefault.default), (0, _reduxDevtoolsExtension.devToolsEnhancer)());
 // Main component (will eventually use all the others)
 class MyFlixApplication extends (0, _reactDefault.default).Component {
     render() {
@@ -27252,6 +27252,7 @@ var _actions = require("../../actions/actions");
 var _reactBootstrap = require("react-bootstrap");
 var _moviesList = require("../movies-list/movies-list");
 var _loginView = require("../login-view/login-view");
+// import { MovieCard } from '../movie-card/movie-card';
 var _movieView = require("../movie-view/movie-view");
 var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
@@ -27305,7 +27306,7 @@ class MainView extends (0, _reactDefault.default).Component {
     }
     render() {
         let { movies  } = this.props;
-        let { user: user1  } = this.props; //finally resolved after change state to props Aug 16, 2022.
+        let { user: user1  } = this.state;
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbar.Menubar), {
@@ -42896,7 +42897,7 @@ function MoviesList(props) {
                 style: {
                     margin: "1em"
                 },
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _visibilityFilterInputDefault.default), {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("visibilityFilterInput", {
                     visibilityFilter: visibilityFilter
                 }, void 0, false, {
                     fileName: "src/components/movies-list/movies-list.jsx",
