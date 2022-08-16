@@ -14,6 +14,7 @@ function visibilityFilter(state = '', action) {//initailize state object of stri
 function movies(state = [], action) { //initialize state object of empty array pass in action
   switch (action.type) {
     case SET_MOVIES:
+      console.log('SET_MOVIES reducer reached');
       return action.value;
     default:
       return state;
