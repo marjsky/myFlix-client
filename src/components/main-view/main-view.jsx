@@ -1,20 +1,21 @@
 import React from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { setMovies } from '../../actions/actions';
 import { Row, Col } from 'react-bootstrap';
 
-import { MoviesList } from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
-
-import { MovieView } from '../movie-view/movie-view';
+// import { MovieCard } from '../movie-card/movie-card'; use MoviesList component
+import MovieView from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { Menubar } from '../navbar-view/navbar';
-import { ProfileView } from '../profile-view/profile-view';
+import ProfileView from '../profile-view/profile-view';
 
+import { connect } from 'react-redux';
+import { setMovies } from '../../actions/actions';
+import MoviesList  from '../movies-list/movies-list';
 
 class MainView extends React.Component {
 
@@ -23,7 +24,7 @@ class MainView extends React.Component {
     // Initial state is set to null
     this.state = {
       user: null,
-      favoriteMovie: []
+      // favoriteMovie: []
     };
   }
 
@@ -70,30 +71,38 @@ class MainView extends React.Component {
 
   render() {
     let { movies } = this.props;
-    let { user } = this.props; //finally resolved after change state to props Aug 16, 2022.
+    let { user } = this.state;
 
     return (
       <Router>
         <Menubar user={user} />
         <Row className="main-view justify-content-md-center">
+          
           <Route exact path='/' render={() => {
+            
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
+            
             if (movies.length === 0) return <div className='main-view' />;
+            
             return <MoviesList movies={movies} />;
           }} />
           
           <Route path='/register' render={() => {
+            
             if (user) return <Redirect to='/' />
+            
             return <Col>
               <RegistrationView />
             </Col>
           }} />
 
           <Route path='/user/:username' render={({match, history}) => {
+            
             if (!user) return <LoginView
               onLoggedIn={user => this.onLoggedIn(user)} />
+            
             return <Col>
               <ProfileView 
                 history={history}
@@ -104,10 +113,13 @@ class MainView extends React.Component {
           }} />
 
           <Route path='/movies/:_id' render={({match, history}) => {
+            
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
+            
             if (movies.length === 0) return <div className='main-view' />;
+            
             return <Col md={8}>
               <MovieView 
                 movie={movies.find(m => m._id === match.params._id)} 
@@ -117,10 +129,13 @@ class MainView extends React.Component {
           }} />
 
           <Route path='/directors/:name' render={({match, history}) => {
+            
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
+            
             if (movies.length === 0) return <div className='main-view' />;
+            
             return <Col md={8}>
               <DirectorView 
                 director={movies.find(m => m.Director.Name === match.params.name).Director} 
@@ -130,10 +145,13 @@ class MainView extends React.Component {
           }} />
 
           <Route path='/genres/:name' render={({match, history}) => {
+            
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
+            
             if (movies.length === 0) return <div className='main-view' />;
+            
             return <Col md={8}>
               <GenreView
                 genre={movies.find(m => m.Genre.Name === match.params.name).Genre}
