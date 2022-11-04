@@ -1,6 +1,7 @@
 import React from 'react';
-import { PropTypes }  from 'prop-types';
+import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
+import './genre-view.scss';
 
 export class GenreView extends React.Component {
 
@@ -10,9 +11,9 @@ export class GenreView extends React.Component {
     return(
       <Card style={{ width: 'auto'}}>
         <Card.Body style={{ fontSize: '10px' }}>
-          <Card.Title>{genre.Name}</Card.Title>
+          <Card.Title>Genre: {genre.Name}</Card.Title>
+          <Card.Subtitle>Description</Card.Subtitle>
           <Card.Text>
-            Description <br/>
             {genre.Description}
           </Card.Text>
           <Button
@@ -27,8 +28,9 @@ export class GenreView extends React.Component {
 export default GenreView;
 
 GenreView.propTypes = {
-    Genre: PropTypes.shape({
+    genre: PropTypes.shape({
       Name: PropTypes.string.isRequired,
       Description: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    onBackClick: PropTypes.func.isRequired
 };

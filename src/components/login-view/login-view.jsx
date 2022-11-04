@@ -53,7 +53,7 @@ export function LoginView(props) {
   return (
     <Container fluid className='loginContainer my-2 mx-12'>
       <Row className='justify-content-sm-center'>
-        <Col style={{ paddingTop: '3rem', }} xs={8} sm={8} md={6} >
+        <Col style={{ paddingTop: '3rem', }} xs={12} sm={8} md={6} >
           <Card>
             <Card.Body>
               <Card.Title style={{textAlign: 'center'}}>Login </Card.Title>
