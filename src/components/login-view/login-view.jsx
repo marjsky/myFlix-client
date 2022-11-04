@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Container, Row, Col, Card, Form, Button, Navbar, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import './login-view.scss';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -16,15 +18,15 @@ export function LoginView(props) {
     if (!username){
       setUsernameErr('Username Required');
       isReq = false;
-    } else if (username.length < 2) {
-      setUsernameErr('Username must be 2 characters long');
+    } else if (username.length < 5) {
+      setUsernameErr('Username must be 5 characters long');
       isReq - false;
     }
     if (!password) {
       setPasswordErr('Password Required');
       isReq = false;
-    } else if (password.length < 6) {
-      setPassword('Password must be 6 characters long');
+    } else if (password.length < 8) {
+      setPassword('Password must be 8 characters long');
       isReq = false;
     }
 
@@ -45,7 +47,8 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch(e => {
-        console.log('no such user')
+        console.log('no such user');
+        alert('Username or password does not exist! Please try again');
       });
     }
   };
@@ -71,7 +74,7 @@ export function LoginView(props) {
                 </Form.Group>
 
                 <Form.Group controlId='formPassword'>
-                  <Form.Label>Password:</Form.Label>
+                  <Form.Label className='mt-2' >Password:</Form.Label>
                   <Form.Control 
                     type='password' 
                     placeholder='Password'
@@ -81,7 +84,8 @@ export function LoginView(props) {
                   {/* code added here to display validation error */}
                   {passwordErr && <p>{passwordErr}</p>}
                 </Form.Group>
-                <Button 
+                <Button
+                  className='mt-4 btn-block' 
                   variant='primary' 
                   type='submit' 
                   onClick={handleSubmit}>
@@ -92,6 +96,12 @@ export function LoginView(props) {
           </Card>
         </Col>
       </Row>
+      <Row className="justify-content-sm-center mt-1">
+        <Col className="text-center" md={4}>
+          <span>New user?</span> 
+          <Link to="/register"><Button variant="link">Register here</Button></Link> 
+        </Col>
+      </Row>      
     </Container>
   );
 }
