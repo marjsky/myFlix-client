@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
+import { SET_FILTER, SET_MOVIES, SET_USER } from '../actions/actions';
 
-import { SET_FILTER, SET_MOVIES } from '../actions/actions';
-
-function visibilityFilter(state = '', action) {//initailize state object of string T or F pass in action
+function visibilityFilter(state = '', action) {
   switch (action.type) {
     case SET_FILTER:
       return action.value;
@@ -11,20 +10,28 @@ function visibilityFilter(state = '', action) {//initailize state object of stri
   }
 }
 
-function movies(state = [], action) { //initialize state object of empty array pass in action
+function movies(state = [], action) {
   switch (action.type) {
     case SET_MOVIES:
-      console.log('SET_MOVIES reducer reached');
       return action.value;
     default:
       return state;
   }
 }
 
-// combined reducers functionality from Redux helps us into one reducer use anywhere else in app.
+function user(state = '', action) {
+  switch (action.type) {
+    case SET_USER:
+      return action.value;
+    default:
+      return state;
+  }
+}
+
 const moviesApp = combineReducers({
-    visibilityFilter,
-    movies
+  visibilityFilter,
+  movies,
+  user
 });
 
 export default moviesApp;

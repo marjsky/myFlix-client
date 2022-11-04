@@ -61,7 +61,7 @@ export function RegistrationView(props) {
         window.open('/', '_self'); // '_self' page open current tab
       })
       .catch( e => {
-        console.error(response);
+        console.error(e);
         alert('unable to register');
       });
     }
