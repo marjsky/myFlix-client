@@ -12,7 +12,7 @@ export function UserUpdate ({
   return(
     <Card>
       <Card.Body>
-      <Row>
+      <Row className='align-items-center justify-content-center'>
         <h3>Profile</h3>
       </Row>
       <Form>

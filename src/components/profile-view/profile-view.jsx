@@ -129,11 +129,6 @@ export function ProfileView ({movies}) {
     <Container>
       <Row style={{marginTop: 10}}>
         <Col xs={12} sm={3}>
-          <Card>
-            <Card.Body>
-              <UserInfo name={user.Username} email={user.Email} />
-            </Card.Body>
-          </Card>
         </Col>
         <Col xs={12} sm={6}>
               <UserUpdate 
@@ -143,7 +138,7 @@ export function ProfileView ({movies}) {
                 email={email} setEmail={setEmail} emailErr={emailErr}
                 birthday={birthday} setBirthday={setBirthday}/>
         </Col>
-        <Col>
+        <Col className='col-sm-12 text-center mb-2'>
           <Button className='deregister-button' variant='danger' onClick={() => deregister()}>Deregister</Button>   
         </Col>
       </Row>     

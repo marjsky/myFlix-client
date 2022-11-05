@@ -24,9 +24,9 @@ export function FavoriteMovies({ favoriteMovieList2 }) {
 
   return(
     <Container>
-      <Card.Body>
+      <Card.Body >
         <Row>
-          <Col xs={12}>
+          <Col xs={12} class='mx-auto' >
             <h4>Favorite Movies</h4>  
           </Col>  
         </Row>
