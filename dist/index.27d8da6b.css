@@ -1,0 +1,61 @@
+
+
+
+
+
+
+.movie-card-description {
+  display: none;
+}
+
+img.card-img-top {
+  height: 200px;
+}
+
+div.card-body {
+  min-width: 100%;
+}
+
+
+
+.fav-movie {
+  margin-bottom: 15px;
+}
+
+.fav-movie figure {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.fav-movie figure img {
+  height: 400px;
+  margin: auto;
+  display: block;
+}
+
+.fav-movie figure figcaption {
+  text-align: center;
+}
+
+.fav-movie button.btn {
+  margin: auto;
+  display: block;
+}
+
+.card {
+  margin-bottom: 15px;
+}
+
+.my-flix {
+  color: #4682b4;
+}
+
+div.container {
+  max-width: 100%;
+}
+
+/*# sourceMappingURL=index.27d8da6b.css.map */
