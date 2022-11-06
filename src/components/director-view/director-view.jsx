@@ -21,22 +21,23 @@ export class DirectorView extends React.Component {
           </Col>
           <Col></Col>
           <Col lg={10} md={11} sm={11}>
-          <Card>
-            <Card.Body style={{ fontSize: '16px' }}>
-              <Card.Title>Director: {director.Name}</Card.Title>
-              <Card.Text>
-                Birth: {director.Birth}
-              </Card.Text>
-              <Card.Subtitle>Biography</Card.Subtitle>          
-              <Card.Text className='mt+3' >{director.Bio}</Card.Text>
-            </Card.Body>
-          </Card></Col>
+            <Card>
+              <Card.Body style={{ fontSize: '16px' }}>
+                <Card.Title>Director: {director.Name}</Card.Title>
+                <Card.Text>
+                  Birth: {director.Birth}
+                </Card.Text>
+                <Card.Subtitle>Biography</Card.Subtitle>          
+                <Card.Text className='mt+3' >{director.Bio}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
         <Row className='justify-content-center mt-2'>     
           <Card.Subtitle className='col-sm-12 text-center mb-2'>Some movies from this director</Card.Subtitle>
             <Row className='flex-sm-nowrap justify-content-sm-center'>
               {movies.map(m => (
-                <Col xs={11} sm={5} md={''} lg={5}
+                <Col
                   className="director-body main-grid-item p-0"  
                   key={m._id}
                   >
