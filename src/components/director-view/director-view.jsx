@@ -13,14 +13,14 @@ export class DirectorView extends React.Component {
 
       <Container>
         <Row className='pt-3'>
-          <Col lg={1} md={1} sm={1}>              
+          <Col lg={1} md={'auto'} sm={1}>              
             <Button 
-              
               variant='primary'
               onClick={() => {onBackClick(null)}}>Back
             </Button>
           </Col>
-          <Col lg={11} md={11} sm={11}>
+          <Col></Col>
+          <Col lg={10} md={11} sm={11}>
           <Card>
             <Card.Body style={{ fontSize: '16px' }}>
               <Card.Title>Director: {director.Name}</Card.Title>
@@ -32,26 +32,20 @@ export class DirectorView extends React.Component {
             </Card.Body>
           </Card></Col>
         </Row>
-        <Row className='mt-4'>
-          <Card className='mx-auto'>
-            <Card.Body>
-              <Card.Subtitle >Some movies from this director</Card.Subtitle>
-              <Row>
+        <Row className='justify-content-center mt-2'>     
+          <Card.Subtitle className='col-sm-12 text-center mb-2'>Some movies from this director</Card.Subtitle>
+            <Row className='flex-sm-nowrap justify-content-sm-center'>
               {movies.map(m => (
-                  <Col xs={'auto'} md={'auto'} lg={'auto'} 
-                    className="director-body main-grid-item "  
-                    key={m._id}
-                    >
-                    <MovieCard movie={m} />
-                  </Col>
-                ))}
-              </Row>
-            </Card.Body>
-          </Card>
-
+                <Col xs={11} sm={5} md={''} lg={5}
+                  className="director-body main-grid-item p-0"  
+                  key={m._id}
+                  >
+                  <MovieCard movie={m} />
+                </Col>
+              ))}
+            </Row>
         </Row>
       </Container>
-
     );
   }
 }
