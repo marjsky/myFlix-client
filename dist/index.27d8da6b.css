@@ -2,6 +2,8 @@
 
 
 
+
+
 .movie-card-description {
   display: none;
 }
@@ -13,8 +15,6 @@ img.card-img-top {
 div.card-body {
   min-width: 100%;
 }
-
-
 
 
 
