@@ -2,7 +2,7 @@
   "name": "myflix-client",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.html",
+  "source": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel",
@@ -22,7 +22,7 @@
     "axios": "^0.27.2",
     "eslint-plugin-react-hooks": "^4.7.0-next-9fcaf88d5-20220801",
     "npm-check-updates": "^15.3.4",
-    "parcel": "^2.0.0-rc.0",
+    "parcel": "^2.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
@@ -34,7 +34,7 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.6.2",
+    "@parcel/transformer-sass": "^2.7.0",
     "buffer": "^6.0.3",
     "process": "^0.11.10"
   }
