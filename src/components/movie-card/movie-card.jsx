@@ -8,18 +8,20 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
     
     return (
-      <Container>
-        <Col className='movie-card-col' sm={'auto'} lg={'auto'} >
-              <Card className='movie-card'>
-        <Card.Img variant='top' src={movie.ImagePath} />
-        <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text className='movie-card-description'>{movie.Description}</Card.Text>
-          <Link to={`/movies/${movie._id}`}>
-            <Button variant='primary'>Open</Button>
-          </Link>
-        </Card.Body>
-      </Card>
+      <Container className='p-0'>
+        <Col className='movie-card-col'>
+          <Card className='movie-card'>
+          <Card.Img 
+            variant='top'
+            src={movie.ImagePath} />
+          <Card.Body>
+            <Card.Title>{movie.Title}</Card.Title>
+            <Card.Text className='movie-card-description'>{movie.Description}</Card.Text>
+            <Link to={`/movies/${movie._id}`}>
+              <Button variant='primary'>Open</Button>
+            </Link>
+          </Card.Body>
+        </Card>
       </Col>
       </Container>
     );

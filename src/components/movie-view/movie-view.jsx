@@ -50,10 +50,10 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <Container className="movie-view">
+      <Container className="movie-view pt-3">
         <Row>
           <Col>
-            <div className="movie-poster">
+            <div className="d-flex justify-content-center">
               <img src={movie.ImagePath} />
             </div>
           </Col>
@@ -61,7 +61,7 @@ export class MovieView extends React.Component {
         <Row>
           <Col>
             <div className="movie-title">
-              <span className="label">Title: </span>
+              <span className="label"><strong>TItile: </strong></span>
               <span className="value">{movie.Title}</span>
             </div>
           </Col>
@@ -69,15 +69,15 @@ export class MovieView extends React.Component {
         <Row>
           <Col>
             <div className="movie-description">
-              <span className="label">Description: </span>
+              <span className="label"><strong>Description: </strong></span>
               <span className="value">{movie.Description}</span>
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className="mt-2">
           <Col>
             <div className="movie-genre">
-              <span className="label">Genre: </span>
+              <span className="label"><strong>Genre: </strong></span>
               <Link to={`/genres/${movie.Genre.Name}`}>
                 <span className="value">{movie.Genre.Name}</span>
               </Link>
@@ -87,14 +87,14 @@ export class MovieView extends React.Component {
         <Row>
           <Col>
             <div className="movie-director">
-              <span className="label">Driector: </span>
+              <span className="label"><strong>Driector: </strong></span>
               <Link to={`/directors/${movie.Director.Name}`}>
                 <span className="value">{movie.Director.Name}</span>
               </Link>
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className="mt-2">
           <Col>
             <Button
               className="my-1"

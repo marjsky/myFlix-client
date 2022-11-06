@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
@@ -14,26 +13,24 @@ import { Menubar } from '../navbar-view/navbar';
 import ProfileView from '../profile-view/profile-view';
 
 import { connect } from 'react-redux';
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 import MoviesList  from '../movies-list/movies-list';
 
 class MainView extends React.Component {
 
-  constructor() {
-    super();
-    // Initial state is set to null
-    this.state = {
-      user: null,
-      // favoriteMovie: []
-    };
-  }
+  // constructor() {
+  //   super();
+  //   Initial state is set to null
+  //   this.state = {
+  //     user: null,
+  //     favoriteMovie: []
+  //   };
+  // }
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
+      this.props.setUser(localStorage.getItem('user'));
       this.getMovies(accessToken);
     }
   }
@@ -52,9 +49,7 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
-      user: authData.user.Username
-    });
+    this.props.setUser(authData.user.Username);
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
@@ -70,8 +65,8 @@ class MainView extends React.Component {
 }
 
   render() {
-    let { movies } = this.props;
-    let { user } = this.state;
+    let { movies, user } = this.props;
+    //let { user } = this.state;
 
     return (
       <Router>
@@ -137,7 +132,8 @@ class MainView extends React.Component {
             if (movies.length === 0) return <div className='main-view' />;
             
             return <Col md={8}>
-              <DirectorView 
+              <DirectorView
+                movies={movies.filter(m => m.Director.Name === match.params.name)} 
                 director={movies.find(m => m.Director.Name === match.params.name).Director} 
                 onBackClick={() => history.goBack()} 
               />
@@ -154,6 +150,7 @@ class MainView extends React.Component {
             
             return <Col md={8}>
               <GenreView
+                movies={movies.filter(m => m.Genre.Name === match.params.name)} 
                 genre={movies.find(m => m.Genre.Name === match.params.name).Genre}
                 onBackClick={() => history.goBack()}
               />
@@ -166,7 +163,7 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return { movies: state.movies, user: state.user }
 }
 
-export default connect(mapStateToProps, { setMovies } )(MainView);
+export default connect(mapStateToProps, { setMovies, setUser } )(MainView);
