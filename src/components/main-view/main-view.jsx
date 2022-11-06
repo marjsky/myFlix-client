@@ -93,7 +93,7 @@ class MainView extends React.Component {
             </Col>
           }} />
 
-          <Route path='/user/:username' render={({match, history}) => {
+          <Route path='/users/:username' render={({match, history}) => {
             
             if (!user) return <LoginView
               onLoggedIn={user => this.onLoggedIn(user)} />
