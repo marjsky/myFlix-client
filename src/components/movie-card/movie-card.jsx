@@ -9,7 +9,7 @@ export class MovieCard extends React.Component {
     
     return (
       <Container className='p-0'>
-        <Col className='movie-card-col'>
+        <Col className='movie-card col-lg-10'>
           <Card className='movie-card'>
           <Card.Img 
             variant='top'

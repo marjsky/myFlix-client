@@ -3,6 +3,8 @@
 
 This the client-side of a movies library application. The app will allow users to register, display the movies present in the database, create a list of favourites within which they can add and remove movies, get information about different directors and movie genres, they will also be able to deregister from the app.
 
+Check it out live at https://marjsky-myflix.netlify.app/
+
 ## Objective
 Using React, build the client-side for an application called myFlix based on its existing server-side code (REST API and database).
 
