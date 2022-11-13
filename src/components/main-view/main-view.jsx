@@ -18,21 +18,32 @@ import MoviesList  from '../movies-list/movies-list';
 
 class MainView extends React.Component {
 
-  // constructor() {
-  //   super();
-  //   Initial state is set to null
-  //   this.state = {
-  //     user: null,
-  //     favoriteMovie: []
-  //   };
-  // }
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false
+    };
+  }
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.props.setUser(localStorage.getItem('user'));
+      this.getUser(accessToken, localStorage.getItem('user'))
       this.getMovies(accessToken);
+      this.setState({ loggedIn: true })
     }
+  }
+  
+  getUser(token, username) {
+    axios.get(`https://mj23flixdb.herokuapp.com/users/${username}`, {
+      headers: {Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      this.props.setUser(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   getMovies(token) {
@@ -49,7 +60,8 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log(authData);
-    this.props.setUser(authData.user.Username);
+    this.props.setUser(authData.user);
+    this.setState({ loggedIn: true})
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
@@ -59,23 +71,22 @@ class MainView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    this.setState({
-        user: null
-    });
+    this.setState({ loggedIn: false })
 }
 
   render() {
     let { movies, user } = this.props;
     //let { user } = this.state;
 
+
     return (
       <Router>
-        <Menubar user={user} />
+        <Menubar user={user.Username} />
         <Row className="main-view justify-content-md-center">
           
           <Route exact path='/' render={() => {
             
-            if (!user) return <Col>
+            if (!this.state.loggedIn) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             
@@ -95,7 +106,7 @@ class MainView extends React.Component {
 
           <Route path='/users/:username' render={({match, history}) => {
             
-            if (!user) return <LoginView
+            if (!this.state.loggedIn) return <LoginView
               onLoggedIn={user => this.onLoggedIn(user)} />
             
             return <Col>
@@ -109,7 +120,7 @@ class MainView extends React.Component {
 
           <Route path='/movies/:_id' render={({match, history}) => {
             
-            if (!user) return <Col>
+            if (!this.state.loggedIn) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             
@@ -125,7 +136,7 @@ class MainView extends React.Component {
 
           <Route path='/directors/:name' render={({match, history}) => {
             
-            if (!user) return <Col>
+            if (!this.state.loggedIn) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             
@@ -142,7 +153,7 @@ class MainView extends React.Component {
 
           <Route path='/genres/:name' render={({match, history}) => {
             
-            if (!user) return <Col>
+            if (!this.state.loggedIn) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             
