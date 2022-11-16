@@ -4,20 +4,23 @@ import { Col, Row, Figure, Button, Card, Container } from 'react-bootstrap';
 import './profile-view.scss';
 import axios from 'axios';
  
-export function FavoriteMovies({ favoriteMovieList2 }) {
+export function FavoriteMovies({ movies, favMovieFilter }) {
   
-  // const favoriteMoviesId = favoriteMovies.map(m => m._id)
+  console.log('list of array', favMovieFilter);
+  
+  console.log('list of movies', movies);
 
   const removeFav = (id) => {
     let token = localStorage.getItem('token');
     let username = localStorage.getItem('user');
-    let url = `https://mj23flixdb.herokuapp.com/users/${localStorage.getItem('user')}/movies/${id}`;
+    let url = `https://mj23flixdb.herokuapp.com/users/${username}/movies/${id}`;
     axios.delete(url, {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then(() => {
+      .then((res) => {
         alert('Movie successfully deleted.')
-        window.open(`/user/${username}`, '_self');
+        window.open(`/users/${username}`, '_self');
+        console.log('resp', res.data.FavoriteMovies);
       })
       .catch(error => console.error(error))
   };
@@ -26,26 +29,26 @@ export function FavoriteMovies({ favoriteMovieList2 }) {
     <Container>
       <Card.Body >
         <Row>
-          <Col xs={12} class='mx-auto' >
+          <Col xs={12} className='mx-auto' >
             <h4>Favorite Movies</h4>  
           </Col>  
         </Row>
         <Row>
-          {favoriteMovieList2.map(({ImagePath, Title, _id}) => {
+          {favMovieFilter.map(fav => {
             return (
-              <Col xs={12} md={4} lg={4} key={_id} className='fav-movie'>
+              <Col xs={12} md={4} lg={4} key={fav._id} className='fav-movie'>
                 <Figure>
-                <Link to={`/movies/${_id}`}>
+                <Link to={`/movies/${fav._id}`}>
                   <Figure.Image
-                    src={ImagePath}
-                    alt={Title}
+                    src={fav.ImagePath}
+                    alt={fav.Title}
                     />
                     <Figure.Caption>
-                      {Title}
+                      {fav.Title}
                     </Figure.Caption>
                 </Link>
                 </Figure>
-                <Button variant='secondary' onClick={() => removeFav(_id)}>Remove from list</Button>
+                <Button variant='secondary' onClick={() => removeFav(fav._id)}>Remove from list</Button>
               </Col>
             )
           })}
@@ -54,5 +57,3 @@ export function FavoriteMovies({ favoriteMovieList2 }) {
     </Container>
   )
 }
-
-export default FavoriteMovies

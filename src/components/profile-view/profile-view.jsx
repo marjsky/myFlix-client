@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Figure, Container, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
-import { UserInfo } from './user-info';
+// import { UserInfo } from './user-info';
 import { UserUpdate } from './user-update';
 import { FavoriteMovies } from './favorite-movies';
+
+import { connect } from "react-redux";
+import { setMovies, setUser } from "../../actions/actions" ;
 
 export function ProfileView ({movies}) {
 
@@ -118,11 +121,11 @@ export function ProfileView ({movies}) {
       console.log('Unable to delete profile');
     })
   }
-  
-  const favoriteMovieList2 = movies.filter(( movies ) => {
+
+  const favMovieFilter = movies.filter(( movies ) => {
     return favoriteMoviesList.includes(movies._id);
   });
-  console.log(favoriteMovieList2);
+  console.log(favMovieFilter);
 
   return(
 
@@ -144,14 +147,20 @@ export function ProfileView ({movies}) {
       </Row>     
       <Card>
         <Col sm={12}>
-            <FavoriteMovies favoriteMovieList2={favoriteMovieList2} />
+            <FavoriteMovies movies={movies} favMovieFilter={favMovieFilter}  />
         </Col>
-    </Card>
+      </Card>
     </Container>
   )
 }
 
-export default ProfileView;
+let mapStateToProps = state => {
+  return { movies: state.movies, user: state.user }
+}
+
+export default connect(mapStateToProps, { setMovies, setUser })(ProfileView);
+
+//export default ProfileView;
 
 ProfileView.propTypes = {
   profileView: PropTypes.shape({
