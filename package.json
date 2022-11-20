@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/marjsky/myFlix-client#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.0",
     "axios": "^0.27.2",
     "eslint-plugin-react-hooks": "^4.7.0-next-9fcaf88d5-20220801",
     "npm-check-updates": "^15.3.4",
