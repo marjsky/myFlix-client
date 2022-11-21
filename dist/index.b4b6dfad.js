@@ -2909,6 +2909,7 @@ var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
 var _container = require("react-bootstrap/Container");
 var _containerDefault = parcelHelpers.interopDefault(_container);
 var _redux = require("redux");
+//import store from './redux/store'
 var _reactRedux = require("react-redux");
 var _reducers = require("./reducers/reducers");
 var _reducersDefault = parcelHelpers.interopDefault(_reducers);
@@ -2924,17 +2925,17 @@ class MyFlixApplication extends (0, _reactDefault.default).Component {
             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _containerDefault.default), {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainViewDefault.default), {}, void 0, false, {
                     fileName: "src/index.jsx",
-                    lineNumber: 22,
+                    lineNumber: 23,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "src/index.jsx",
-                lineNumber: 21,
+                lineNumber: 22,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "src/index.jsx",
-            lineNumber: 20,
+            lineNumber: 21,
             columnNumber: 7
         }, this);
     }
@@ -2945,7 +2946,7 @@ const root = (0, _client.createRoot)(container);
 //Tells React to render your app in the root DOM element
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MyFlixApplication, {}, void 0, false, {
     fileName: "src/index.jsx",
-    lineNumber: 35,
+    lineNumber: 36,
     columnNumber: 13
 }, undefined));
 
@@ -27367,7 +27368,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","react-router-dom":"cHIiW","react-bootstrap":"3AD9A","../login-view/login-view":"9YtA0","../movie-view/movie-view":"ggaUx","../director-view/director-view":"9tpci","../genre-view/genre-view":"4tuA0","../registration-view/registration-view":"3U8r7","../navbar-view/navbar":"63rFd","react-redux":"bdVon","../../actions/actions":"biFwH","../movies-list/movies-list":"bPxKK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../profile-view/profile-view":"2vVqf"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","react-router-dom":"cHIiW","react-bootstrap":"3AD9A","../login-view/login-view":"9YtA0","../movie-view/movie-view":"ggaUx","../director-view/director-view":"9tpci","../genre-view/genre-view":"4tuA0","../registration-view/registration-view":"3U8r7","../navbar-view/navbar":"63rFd","../movies-list/movies-list":"bPxKK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../profile-view/profile-view":"2vVqf","../../actions/actions":"biFwH","react-redux":"bdVon"}],"jo6P5":[function(require,module,exports) {
 module.exports = require("./lib/axios");
 
 },{"./lib/axios":"63MyY"}],"63MyY":[function(require,module,exports) {
@@ -43024,7 +43025,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","react-bootstrap":"3AD9A","axios":"jo6P5","./user-update":"hucfh","react-redux":"bdVon","../../actions/actions":"biFwH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./favorite-movies":"dTTQH"}],"hucfh":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","react-bootstrap":"3AD9A","axios":"jo6P5","./user-update":"hucfh","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./favorite-movies":"dTTQH","react-redux":"bdVon","../../actions/actions":"biFwH"}],"hucfh":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$1f8c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
