@@ -9,7 +9,7 @@ import { FavoriteMovies } from './favorite-movies';
 import { connect } from "react-redux";
 import { setMovies, setUser } from "../../actions/actions" ;
 
-export function ProfileView ({movies}) {
+export const ProfileView = ({movies}) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

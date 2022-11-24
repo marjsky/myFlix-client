@@ -4,7 +4,9 @@ import {Form, Button, Card, CardGroup, Container, Col, Row} from 'react-bootstra
 import axios from 'axios';
 import './registration-view.scss';
 import { Link } from 'react-router-dom';
-export function RegistrationView(props) {
+
+export const RegistrationView = () => {
+  
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ email, setEmail ] = useState('');

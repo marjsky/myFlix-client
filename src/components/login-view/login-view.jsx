@@ -5,7 +5,8 @@ import { Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './login-view.scss';
 
-export function LoginView(props) {
+export const LoginView = (props) => {
+  
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
   // Declare hook for each input

@@ -4,10 +4,9 @@ import { Button, Card, Col, Container, Row} from 'react-bootstrap';
 import MovieCard from '../movie-card/movie-card';
 import './director-view.scss';
 
-export class DirectorView extends React.Component {
+export const DirectorView = (props) =>  {
 
-  render() {
-    const { director, movies, onBackClick } = this.props;
+    const { director, movies, onBackClick } = props;
     
     return (
 
@@ -48,7 +47,6 @@ export class DirectorView extends React.Component {
         </Row>
       </Container>
     );
-  }
 }
 
 DirectorView.propTypes = {

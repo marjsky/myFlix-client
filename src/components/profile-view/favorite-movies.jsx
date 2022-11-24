@@ -4,7 +4,7 @@ import { Col, Row, Figure, Button, Card, Container } from 'react-bootstrap';
 import './profile-view.scss';
 import axios from 'axios';
  
-export function FavoriteMovies({ movies, favMovieFilter }) {
+export const FavoriteMovies = ({ movies, favMovieFilter }) => {
   
   console.log('list of array', favMovieFilter);
   

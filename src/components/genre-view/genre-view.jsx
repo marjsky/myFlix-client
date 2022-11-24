@@ -4,10 +4,9 @@ import { Card, Button, Row, Container, Col } from 'react-bootstrap';
 import './genre-view.scss';
 import MovieCard from '../movie-card/movie-card';
 
-export class GenreView extends React.Component {
+export const GenreView = (props) => {
 
-  render() {
-    const { genre, movies, onBackClick } = this.props;
+    const { genre, movies, onBackClick } = props;
     
     return(
       <Container>
@@ -46,7 +45,6 @@ export class GenreView extends React.Component {
         </Row>
       </Container>
     )
-  }
 }
 
 export default GenreView;

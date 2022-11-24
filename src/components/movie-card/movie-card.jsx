@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import {Card, Button, Col, Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export class MovieCard extends React.Component {
-  render() {
-    const { movie } = this.props;
+export const MovieCard = (props) => {
+  
+    const { movie } = props;
     
     return (
       <Container className='p-0'>
@@ -25,7 +25,6 @@ export class MovieCard extends React.Component {
       </Col>
       </Container>
     );
-  }
 }
 
 export default MovieCard;
