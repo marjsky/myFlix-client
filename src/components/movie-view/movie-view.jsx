@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Button} from 'react-bootstrap';
 import './movie-view.scss';
@@ -8,30 +8,27 @@ import { connect } from "react-redux";
 import { setMovies, setUser } from "../../actions/actions" ;
 
 
-export class MovieView extends React.Component {
+export const MovieView = (props) => {
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: null,
-      password: null,
-      email: null,
-      birthday: null,
-      FavoriteMovies: []
-    };
-  }
+  const [ state, setState ] = useState({
+    username: null,
+    password: null,
+    email: null,
+    birthday: null,
+    FavoriteMovies: []
+  });
 
   // Add favorite movie
   addFavoriteMovie = () => {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem('user');
     
-    axios.post(`https://mj23flixdb.herokuapp.com/users/${user}/movies/${this.props.movie._id}`, {},
+    axios.post(`https://mj23flixdb.herokuapp.com/users/${user}/movies/${props.movie._id}`, {},
       {headers: {Authorization: `Bearer ${token}`}
     })
     .then((response) => {
       console.log(response.data);
-      this.props.setUser(response.data)
+      props.setUser(response.data)
       //alert(`${this.props.movie.Title} has been added to your list of movies.`);
       //window.open('/', '_self');
     })
@@ -44,13 +41,13 @@ export class MovieView extends React.Component {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem('user');
 
-    console.log("I wanna remove", this.props.movie, user, token)
-    axios.delete(`https://mj23flixdb.herokuapp.com/users/${user}/movies/${this.props.movie._id}`,
+    console.log("I wanna remove", props.movie, user, token)
+    axios.delete(`https://mj23flixdb.herokuapp.com/users/${user}/movies/${props.movie._id}`,
     {headers: { Authorization: `Bearer ${token}`}
     })
     .then((response) => {
       console.log(response.date);
-      this.props.setUser(response.data)
+      props.setUser(response.data)
       //alert(`${this.props.movie.Title} has been added to your list of movies.`);
       //window.open('/', '_self');
     })
@@ -60,13 +57,13 @@ export class MovieView extends React.Component {
   }
 
 
-  render() {
-    const { movie, user, onBackClick } = this.props;
+  
+    const { movie, user, onBackClick } = props;
     
     if (!user || !movie) return null;
     let isFav = user.FavoriteMovies.includes(movie._id);
 
-    console.log("I have the user", user, user.Username, user.FavoriteMovies, isFav, this.props.movieId, movie)
+    console.log("I have the user", user, user.Username, user.FavoriteMovies, isFav, props.movieId, movie)
 
     return (
       <Container className="movie-view pt-3">
@@ -127,7 +124,7 @@ export class MovieView extends React.Component {
                 className="ml-3"
                 id="movie-view-button"
                 variant="warning"
-                onClick={this.addFavoriteMovie}>
+                onClick={addFavoriteMovie}>
                   Add to Favorites
             </Button>
             ): (
@@ -135,7 +132,7 @@ export class MovieView extends React.Component {
                 className="ml-3"
                 id="movie-view-button"
                 variant="warning"
-                onClick={this.removeFromFavoriteMovie}>
+                onClick={removeFromFavoriteMovie}>
                 Remove from Favorite
               </Button>
             )}
@@ -144,7 +141,7 @@ export class MovieView extends React.Component {
         </Row>
       </Container>
     );
-  }
+  
 }
 
 let mapStateToProps = state => {
