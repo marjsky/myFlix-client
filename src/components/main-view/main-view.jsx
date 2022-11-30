@@ -55,7 +55,7 @@ const MainView = (props) => {
     });
   }
 
-  onLoggedIn = (authData) => {
+  const onLoggedIn = (authData) => {
     console.log(authData);
     props.setUser(authData.user);
     setState({ loggedIn: true});
@@ -65,7 +65,7 @@ const MainView = (props) => {
     getMovies(authData.token);
   }
 
-  onLoggedOut = () => {
+  const onLoggedOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setState({ loggedIn: false })

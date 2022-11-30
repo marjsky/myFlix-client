@@ -27176,7 +27176,7 @@ const MainView = (props)=>{
             console.log(error);
         });
     };
-    onLoggedIn = (authData)=>{
+    const onLoggedIn = (authData)=>{
         console.log(authData);
         props.setUser(authData.user);
         setState({
@@ -27186,7 +27186,7 @@ const MainView = (props)=>{
         localStorage.setItem("user", authData.user.Username);
         getMovies(authData.token);
     };
-    onLoggedOut = ()=>{
+    const onLoggedOut = ()=>{
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         setState({
