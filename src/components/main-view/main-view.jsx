@@ -58,7 +58,7 @@ const MainView = (props) => {
   onLoggedIn = (authData) => {
     console.log(authData);
     props.setUser(authData.user);
-    setState({ loggedIn: true})
+    setState({ loggedIn: true});
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
