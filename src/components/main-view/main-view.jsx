@@ -94,7 +94,7 @@ const MainView = (props) => {
           
           <Route path='/register' render={() => {
             
-            if (user) return <Redirect to='/' />
+            //if (user) return <Redirect to='/' />
             
             return <Col>
               <RegistrationView />
