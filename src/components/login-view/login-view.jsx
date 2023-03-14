@@ -40,7 +40,7 @@ export const LoginView = (props) => {
     if (isReq){
       /*Send a request to server for authentication*/
       axios
-        .post("https://movie-api-5jsk.onrender.com/login", {
+        .post("https://movie-api-production-3c8a.up.railway.app/login", {
           Username: username,
           Password: password,
         })

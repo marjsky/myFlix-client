@@ -33,7 +33,7 @@ const MainView = (props) => {
   
   const getUser = (token, username) => {
     axios
-      .get(`https://movie-api-5jsk.onrender.com/users/${username}`, {
+      .get(`https://movie-api-production-3c8a.up.railway.app/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -46,7 +46,7 @@ const MainView = (props) => {
 
   const getMovies = (token) => {
     axios
-      .get("https://movie-api-5jsk.onrender.com/movies", {
+      .get("https://movie-api-production-3c8a.up.railway.app/movies", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

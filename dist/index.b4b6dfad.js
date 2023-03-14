@@ -27155,7 +27155,7 @@ const MainView = (props)=>{
         }
     }, []);
     const getUser = (token, username)=>{
-        (0, _axiosDefault.default).get(`https://movie-api-5jsk.onrender.com/users/${username}`, {
+        (0, _axiosDefault.default).get(`https://movie-api-production-3c8a.up.railway.app/users/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -27166,7 +27166,7 @@ const MainView = (props)=>{
         });
     };
     const getMovies = (token)=>{
-        (0, _axiosDefault.default).get("https://movie-api-5jsk.onrender.com/movies", {
+        (0, _axiosDefault.default).get("https://movie-api-production-3c8a.up.railway.app/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -46107,7 +46107,7 @@ const LoginView = (props)=>{
     const handleSubmit = (e)=>{
         e.preventDefault();
         const isReq = validate();
-        if (isReq) /*Send a request to server for authentication*/ (0, _axiosDefault.default).post("https://movie-api-5jsk.onrender.com/login", {
+        if (isReq) /*Send a request to server for authentication*/ (0, _axiosDefault.default).post("https://movie-api-production-3c8a.up.railway.app/login", {
             Username: username,
             Password: password
         }).then((response)=>{
@@ -46470,7 +46470,7 @@ const MovieView = (props)=>{
     addFavoriteMovie = ()=>{
         let token = localStorage.getItem("token");
         let user = localStorage.getItem("user");
-        (0, _axiosDefault.default).post(`https://movie-api-5jsk.onrender.com/users/${user}/movies/${props.movie._id}`, {}, {
+        (0, _axiosDefault.default).post(`https://movie-api-production-3c8a.up.railway.app/users/${user}/movies/${props.movie._id}`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -46487,7 +46487,7 @@ const MovieView = (props)=>{
         let token = localStorage.getItem("token");
         let user = localStorage.getItem("user");
         console.log("I wanna remove", props.movie, user, token);
-        (0, _axiosDefault.default).delete(`https://movie-api-5jsk.onrender.com/users/${user}/movies/${props.movie._id}`, {
+        (0, _axiosDefault.default).delete(`https://movie-api-production-3c8a.up.railway.app/users/${user}/movies/${props.movie._id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -48853,7 +48853,7 @@ const RegistrationView = ()=>{
         e.preventDefault();
         const isReq = validate();
         if (isReq) // Send request to server for users
-        (0, _axiosDefault.default).post("https://movie-api-5jsk.onrender.com/users", {
+        (0, _axiosDefault.default).post("https://movie-api-production-3c8a.up.railway.app/users", {
             Username: username,
             Password: password,
             Email: email,
@@ -49385,7 +49385,7 @@ const ProfileView = ({ movies  })=>{
     const getUserData = ()=>{
         let token = localStorage.getItem("token");
         let user = localStorage.getItem("user");
-        (0, _axiosDefault.default).get(`https://movie-api-5jsk.onrender.com/users/${user}`, {
+        (0, _axiosDefault.default).get(`https://movie-api-production-3c8a.up.railway.app/users/${user}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -49433,7 +49433,7 @@ const ProfileView = ({ movies  })=>{
             const currentUser = localStorage.getItem("user");
             const token = localStorage.getItem("token");
             // Send request to update for users
-            (0, _axiosDefault.default).put(`https://movie-api-5jsk.onrender.com/users/${currentUser}`, {
+            (0, _axiosDefault.default).put(`https://movie-api-production-3c8a.up.railway.app/users/${currentUser}`, {
                 Username: username,
                 Password: password,
                 Email: email,
@@ -49458,7 +49458,7 @@ const ProfileView = ({ movies  })=>{
     const deregister = ()=>{
         let token = localStorage.getItem("token");
         let user = localStorage.getItem("user");
-        (0, _axiosDefault.default).delete(`https://movie-api-5jsk.onrender.com/users/${user}`, {
+        (0, _axiosDefault.default).delete(`https://movie-api-production-3c8a.up.railway.app/users/${user}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -49822,7 +49822,7 @@ const FavoriteMovies = ({ movies , favMovieFilter  })=>{
     const removeFav = (id)=>{
         let token = localStorage.getItem("token");
         let username = localStorage.getItem("user");
-        let url = `https://movie-api-5jsk.onrender.com/users/${username}/movies/${id}`;
+        let url = `https://movie-api-production-3c8a.up.railway.app/users/${username}/movies/${id}`;
         (0, _axiosDefault.default).delete(url, {
             headers: {
                 Authorization: `Bearer ${token}`

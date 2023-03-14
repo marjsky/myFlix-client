@@ -51,7 +51,7 @@ export const RegistrationView = () => {
     if (isReq) {
       // Send request to server for users
       axios
-        .post("https://movie-api-5jsk.onrender.com/users", {
+        .post("https://movie-api-production-3c8a.up.railway.app/users", {
           Username: username,
           Password: password,
           Email: email,

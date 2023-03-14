@@ -25,7 +25,7 @@ export const MovieView = (props) => {
     
     axios
       .post(
-        `https://movie-api-5jsk.onrender.com/users/${user}/movies/${props.movie._id}`,
+        `https://movie-api-production-3c8a.up.railway.app/users/${user}/movies/${props.movie._id}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -47,7 +47,7 @@ export const MovieView = (props) => {
     console.log("I wanna remove", props.movie, user, token)
     axios
       .delete(
-        `https://movie-api-5jsk.onrender.com/users/${user}/movies/${props.movie._id}`,
+        `https://movie-api-production-3c8a.up.railway.app/users/${user}/movies/${props.movie._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {

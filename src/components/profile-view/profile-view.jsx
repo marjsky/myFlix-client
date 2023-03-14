@@ -27,7 +27,7 @@ export const ProfileView = ({movies}) => {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem("user");
     axios
-      .get(`https://movie-api-5jsk.onrender.com/users/${user}`, {
+      .get(`https://movie-api-production-3c8a.up.railway.app/users/${user}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -79,7 +79,7 @@ export const ProfileView = ({movies}) => {
       // Send request to update for users
       axios
         .put(
-          `https://movie-api-5jsk.onrender.com/users/${currentUser}`,
+          `https://movie-api-production-3c8a.up.railway.app/users/${currentUser}`,
           {
             Username: username,
             Password: password,
@@ -111,7 +111,7 @@ export const ProfileView = ({movies}) => {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem("user");
     axios
-      .delete(`https://movie-api-5jsk.onrender.com/users/${user}`, {
+      .delete(`https://movie-api-production-3c8a.up.railway.app/users/${user}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
