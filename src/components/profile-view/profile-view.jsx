@@ -26,19 +26,20 @@ export const ProfileView = ({movies}) => {
   const getUserData = () => {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem("user");
-    axios.get(`https://mj23flixdb.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then((response) => {
-      setUsername(response.data.Username);
-      setEmail(response.data.Email);
-      setUserData(response.data);
-      setFavoriteMoviesList(response.data.FavoriteMovies);
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    })
+    axios
+      .get(`https://movie-api-5jsk.onrender.com/users/${user}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setUsername(response.data.Username);
+        setEmail(response.data.Email);
+        setUserData(response.data);
+        setFavoriteMoviesList(response.data.FavoriteMovies);
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   // validate function
@@ -76,26 +77,29 @@ export const ProfileView = ({movies}) => {
       const currentUser = localStorage.getItem('user');
       const token = localStorage.getItem('token');
       // Send request to update for users
-      axios.put(`https://mj23flixdb.herokuapp.com/users/${currentUser}`, 
-      {
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday,
-      },
-      {
-        headers: { Authorization: `Bearer ${token}`},
-      })
-      .then(response => {
-        alert("Your profile has been updated");
-        localStorage.setItem("user", response.data.Username),
-          console.log(response.data);
-        window.open("/", "_self");
-      })
-      .catch( e => {
-        console.error(e);
-        alert('Something is wrong!');
-      });
+      axios
+        .put(
+          `https://movie-api-5jsk.onrender.com/users/${currentUser}`,
+          {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+        .then((response) => {
+          alert("Your profile has been updated");
+          localStorage.setItem("user", response.data.Username),
+            console.log(response.data);
+          window.open("/", "_self");
+        })
+        .catch((e) => {
+          console.error(e);
+          alert("Something is wrong!");
+        });
     }
   };
 
@@ -106,20 +110,21 @@ export const ProfileView = ({movies}) => {
   const deregister = () => {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem("user");
-    axios.delete(`https://mj23flixdb.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}`},
-    })
-    .then((response) => {
-      console.log(response);
-      alert('Profile deleted');
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-      window.open('/', '_self');
-    })
-    .catch(error => {
-      console.log(error);
-      console.log('Unable to delete profile');
-    })
+    axios
+      .delete(`https://movie-api-5jsk.onrender.com/users/${user}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        alert("Profile deleted");
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        window.open("/", "_self");
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("Unable to delete profile");
+      });
   }
 
   const favMovieFilter = movies.filter(( movies ) => {

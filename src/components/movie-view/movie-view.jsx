@@ -23,18 +23,21 @@ export const MovieView = (props) => {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem('user');
     
-    axios.post(`https://mj23flixdb.herokuapp.com/users/${user}/movies/${props.movie._id}`, {},
-      {headers: {Authorization: `Bearer ${token}`}
-    })
-    .then((response) => {
-      console.log(response.data);
-      props.setUser(response.data)
-      //alert(`${this.props.movie.Title} has been added to your list of movies.`);
-      //window.open('/', '_self');
-    })
-    .catch(e => {
-      console.log('Error')
-    });
+    axios
+      .post(
+        `https://movie-api-5jsk.onrender.com/users/${user}/movies/${props.movie._id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response.data);
+        props.setUser(response.data);
+        //alert(`${this.props.movie.Title} has been added to your list of movies.`);
+        //window.open('/', '_self');
+      })
+      .catch((e) => {
+        console.log("Error");
+      });
   }
 
   removeFromFavoriteMovie = () => {
@@ -42,18 +45,20 @@ export const MovieView = (props) => {
     let user = localStorage.getItem('user');
 
     console.log("I wanna remove", props.movie, user, token)
-    axios.delete(`https://mj23flixdb.herokuapp.com/users/${user}/movies/${props.movie._id}`,
-    {headers: { Authorization: `Bearer ${token}`}
-    })
-    .then((response) => {
-      console.log(response.date);
-      props.setUser(response.data)
-      //alert(`${this.props.movie.Title} has been added to your list of movies.`);
-      //window.open('/', '_self');
-    })
-    .catch(e => {
-      conosle.log('Error')
-    });
+    axios
+      .delete(
+        `https://movie-api-5jsk.onrender.com/users/${user}/movies/${props.movie._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response.date);
+        props.setUser(response.data);
+        //alert(`${this.props.movie.Title} has been added to your list of movies.`);
+        //window.open('/', '_self');
+      })
+      .catch((e) => {
+        conosle.log("Error");
+      });
   }
 
 

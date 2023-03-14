@@ -32,27 +32,29 @@ const MainView = (props) => {
   }, [])
   
   const getUser = (token, username) => {
-    axios.get(`https://mj23flixdb.herokuapp.com/users/${username}`, {
-      headers: {Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      props.setUser(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    axios
+      .get(`https://movie-api-5jsk.onrender.com/users/${username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        props.setUser(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const getMovies = (token) => {
-    axios.get('https://mj23flixdb.herokuapp.com/movies', {
-      headers: {Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      props.setMovies(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    axios
+      .get("https://movie-api-5jsk.onrender.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        props.setMovies(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const onLoggedIn = (authData) => {

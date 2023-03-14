@@ -39,18 +39,19 @@ export const LoginView = (props) => {
     const isReq = validate();
     if (isReq){
       /*Send a request to server for authentication*/
-      axios.post('https://mj23flixdb.herokuapp.com/login', {
-        Username: username,
-        Password: password
-      })
-      .then(response => {
-        const data = response.data;
-        props.onLoggedIn(data);
-      })
-      .catch(e => {
-        console.log('no such user');
-        alert('Username or password does not exist! Please try again');
-      });
+      axios
+        .post("https://movie-api-5jsk.onrender.com/login", {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch((e) => {
+          console.log("no such user");
+          alert("Username or password does not exist! Please try again");
+        });
     }
   };
 

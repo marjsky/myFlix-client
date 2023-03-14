@@ -50,22 +50,23 @@ export const RegistrationView = () => {
     const isReq = validate();
     if (isReq) {
       // Send request to server for users
-      axios.post('https://mj23flixdb.herokuapp.com/users', {
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday
-      })
-      .then(response => {
-        const data = response.data;
-        console.log(data);
-        alert('Registration successful, please login!') ;
-        window.open('/', '_self'); // '_self' page open current tab
-      })
-      .catch( e => {
-        console.error(e);
-        alert('unable to register');
-      });
+      axios
+        .post("https://movie-api-5jsk.onrender.com/users", {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday,
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          alert("Registration successful, please login!");
+          window.open("/", "_self"); // '_self' page open current tab
+        })
+        .catch((e) => {
+          console.error(e);
+          alert("unable to register");
+        });
     }
   };
 
