@@ -27177,7 +27177,7 @@ const MainView = (props)=>{
         });
     };
     const onLoggedIn = (authData)=>{
-        console.log(authData);
+        //console.log(authData); not show during production its just test
         props.setUser(authData.user);
         setState({
             loggedIn: true
